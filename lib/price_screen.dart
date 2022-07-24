@@ -53,6 +53,9 @@ class _PriceScreenState extends State<PriceScreen> {
                 DropdownMenuItem(child: Text('LTC'), value: 'LTC'),
               ],
               onChanged: (value) {
+                setState(() {
+                  selectedCurrency = value!;
+                });
                 print(value);
               },
             ),
