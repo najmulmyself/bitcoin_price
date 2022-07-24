@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, avoid_print, sort_child_properties_last
+
 import 'package:flutter/material.dart';
 
 class PriceScreen extends StatefulWidget {
@@ -6,6 +8,7 @@ class PriceScreen extends StatefulWidget {
 }
 
 class _PriceScreenState extends State<PriceScreen> {
+  // String selectedCurrency = 'USD';
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -42,7 +45,17 @@ class _PriceScreenState extends State<PriceScreen> {
             alignment: Alignment.center,
             padding: EdgeInsets.only(bottom: 30.0),
             color: Colors.lightBlue,
-            child: null,
+            child: DropdownButton(
+              value: 'selectedCurrency',
+              items: [
+                DropdownMenuItem(child: Text('BTC'), value: 'BTC'),
+                DropdownMenuItem(child: Text('ETH'), value: 'ETH'),
+                DropdownMenuItem(child: Text('LTC'), value: 'LTC'),
+              ],
+              onChanged: (value) {
+                print(value);
+              },
+            ),
           ),
         ],
       ),
