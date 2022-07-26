@@ -1,7 +1,9 @@
-// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, avoid_print, sort_child_properties_last
-
+// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, avoid_print, sort_child_properties_last, unused_local_variable
 import 'package:bitcoin/coin_data.dart';
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
+
+final apikey = '5B01AF21-2201-4865-8E91-E030A44280D5';
 
 class PriceScreen extends StatefulWidget {
   @override
@@ -9,6 +11,12 @@ class PriceScreen extends StatefulWidget {
 }
 
 class _PriceScreenState extends State<PriceScreen> {
+  void getData() async{
+    final url = Uri.parse('https://rest.coinapi.io/v1/exchangerate/BTC/INR?apikey=$apikey');
+    var  response = await http
+        .get(url);
+  }
+
   String selectedCurrency = 'USD';
   @override
   Widget build(BuildContext context) {
@@ -31,7 +39,7 @@ class _PriceScreenState extends State<PriceScreen> {
               child: Padding(
                 padding: EdgeInsets.symmetric(vertical: 15.0, horizontal: 28.0),
                 child: Text(
-                  '1 BTC = ? USD',
+                  '1 BTC = ? $selectedCurrency',
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     fontSize: 20.0,
@@ -61,10 +69,10 @@ class _PriceScreenState extends State<PriceScreen> {
                 // }),
 
                 for (String currency in currenciesList)
-                DropdownMenuItem(
-                  child: Text(currency),
-                  value: currency,
-                ),
+                  DropdownMenuItem(
+                    child: Text(currency),
+                    value: currency,
+                  ),
               ],
               onChanged: (value) {
                 setState(() {
@@ -79,5 +87,3 @@ class _PriceScreenState extends State<PriceScreen> {
     );
   }
 }
-
-
