@@ -1,7 +1,8 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, avoid_print, sort_child_properties_last, unused_local_variable
+import 'dart:convert';
+
 import 'package:bitcoin/coin_data.dart';
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
 
 final apikey = '5B01AF21-2201-4865-8E91-E030A44280D5';
 
@@ -11,15 +12,29 @@ class PriceScreen extends StatefulWidget {
 }
 
 class _PriceScreenState extends State<PriceScreen> {
-  void getData() async{
-    final url = Uri.parse('https://rest.coinapi.io/v1/exchangerate/BTC/INR?apikey=$apikey');
-    var  response = await http
-        .get(url);
+  @override
+  void initState() {
+    // TODO: implement initState
+
+    // getData();
   }
 
   String selectedCurrency = 'USD';
+  // void getData() async {
+  //   final url = Uri.parse(
+  //       'https://rest.coinapi.io/v1/exchangerate/BTC/INR?apikey=$apikey');
+  //   var response = await http.get(url);
+  //   var parsed = jsonDecode(response.body);
+  //   var test2 = parsed['time'];
+  //   print(test2);
+  // }
+
   @override
   Widget build(BuildContext context) {
+    var data = CoinData(apiKey: apikey, selectedValue: selectedCurrency);
+    var currencyData = data.getData();
+    print('Hello');
+    print(currencyData);
     return Scaffold(
       appBar: AppBar(
         title: Text('🤑 Coin Ticker'),
