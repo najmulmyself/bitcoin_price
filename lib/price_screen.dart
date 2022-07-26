@@ -1,10 +1,11 @@
-// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, avoid_print, sort_child_properties_last, unused_local_variable
+// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, avoid_print, sort_child_properties_last, unused_local_variable, use_key_in_widget_constructors, library_private_types_in_public_api, must_call_super
 import 'dart:convert';
 
 import 'package:bitcoin/coin_data.dart';
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
 
-final apikey = '5B01AF21-2201-4865-8E91-E030A44280D5';
+const apikey = '5B01AF21-2201-4865-8E91-E030A44280D5';
 
 class PriceScreen extends StatefulWidget {
   @override
@@ -12,25 +13,26 @@ class PriceScreen extends StatefulWidget {
 }
 
 class _PriceScreenState extends State<PriceScreen> {
+  String? parsedCoin;
   @override
   void initState() {
-    // TODO: implement initState
-
     // getData();
   }
 
   String selectedCurrency = 'USD';
-  // void getData() async {
-  //   final url = Uri.parse(
-  //       'https://rest.coinapi.io/v1/exchangerate/BTC/INR?apikey=$apikey');
-  //   var response = await http.get(url);
-  //   var parsed = jsonDecode(response.body);
-  //   var test2 = parsed['time'];
-  //   print(test2);
-  // }
+  Future getData() async {
+    final url = Uri.parse(
+        'https://rest.coinapi.io/v1/exchangerate/BTC/INR?apikey=$apikey');
+    var response = await http.get(url);
+    var parsed = jsonDecode(response.body);
+    var test2 = parsed['time'];
+    print(test2);
+    return test2 = parsedCoin;
+  }
 
   @override
   Widget build(BuildContext context) {
+    print('$parsedCoin + asdfhlsdfj');
     var data = CoinData(apiKey: apikey, selectedValue: selectedCurrency);
     var currencyData = data.getData();
     print('Hello');
@@ -54,7 +56,7 @@ class _PriceScreenState extends State<PriceScreen> {
               child: Padding(
                 padding: EdgeInsets.symmetric(vertical: 15.0, horizontal: 28.0),
                 child: Text(
-                  '1 BTC = ? $selectedCurrency',
+                  '1 BTC = ${parsedCoin} $selectedCurrency',
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     fontSize: 20.0,
