@@ -44,5 +44,6 @@ class CoinData {
     var response = await http.get(url);
     var parsedData = jsonDecode(response.body);
     print(parsedData['time']);
+    return parsedData;
   }
 }
