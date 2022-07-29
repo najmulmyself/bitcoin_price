@@ -33,17 +33,17 @@ const List<String> cryptoList = [
   'LTC',
 ];
 
-class CoinData {
-  final selectedValue;
-  final apiKey;
-  CoinData({this.selectedValue, this.apiKey});
+// class CoinData {
+//   final selectedValue;
+//   final apiKey;
+//   CoinData({this.selectedValue, this.apiKey});
 
-  Future getData() async {
-    final url = Uri.parse(
-        'https://rest.coinapi.io/v1/exchangerate/BTC/$selectedValue?apikey=$apiKey');
-    var response = await http.get(url);
-    var parsedData = jsonDecode(response.body);
-    print(parsedData['time']);
-    return parsedData;
-  }
-}
+//   Future getData() async {
+//     final url = Uri.parse(
+//         'https://rest.coinapi.io/v1/exchangerate/BTC/$selectedValue?apikey=$apiKey');
+//     var response = await http.get(url);
+//     var parsedData = jsonDecode(response.body);
+//     // print(parsedData['time']);
+//     return parsedData;
+//   }
+// }

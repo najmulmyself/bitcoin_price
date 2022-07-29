@@ -16,27 +16,29 @@ class _PriceScreenState extends State<PriceScreen> {
   String? parsedCoin;
   @override
   void initState() {
-    // getData();
+    final test = getData();
+
+    print(test);
   }
 
   String selectedCurrency = 'USD';
-  Future getData() async {
+  Future<Map> getData() async {
     final url = Uri.parse(
         'https://rest.coinapi.io/v1/exchangerate/BTC/INR?apikey=$apikey');
     var response = await http.get(url);
     var parsed = jsonDecode(response.body);
-    var test2 = parsed['time'];
-    print(test2);
-    return test2 = parsedCoin;
+    // var test2 = parsed['time'];
+    // print(parsed);
+    return parsed;
   }
 
   @override
   Widget build(BuildContext context) {
-    print('$parsedCoin + asdfhlsdfj');
-    var data = CoinData(apiKey: apikey, selectedValue: selectedCurrency);
-    var currencyData = data.getData();
-    print('Hello');
-    print(currencyData);
+    // print('$parsedCoin + asdfhlsdfj');
+    // var data = CoinData(apiKey: apikey, selectedValue: selectedCurrency);
+    // var currencyData = data.getData();
+    // print('Hello');
+    // print(currencyData);
     return Scaffold(
       appBar: AppBar(
         title: Text('🤑 Coin Ticker'),
@@ -56,7 +58,7 @@ class _PriceScreenState extends State<PriceScreen> {
               child: Padding(
                 padding: EdgeInsets.symmetric(vertical: 15.0, horizontal: 28.0),
                 child: Text(
-                  '1 BTC = ${parsedCoin} $selectedCurrency',
+                  '1 BTC =  $selectedCurrency',
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     fontSize: 20.0,
